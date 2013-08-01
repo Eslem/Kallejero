@@ -1,5 +1,6 @@
 package es.kallejero.mapa;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,16 +22,21 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import es.kallejero.MainActivity;
@@ -40,6 +46,7 @@ import es.kallejero.R.id;
 import es.kallejero.R.layout;
 import es.kallejero.parser.JsonParser;
 import es.kallejero.parser.Rest;
+import es.kallejero.parser.downloadImage;
 		
 /**
  * Created by Eslem on 17/07/13.
@@ -182,7 +189,8 @@ import es.kallejero.parser.Rest;
  
                 // Getting view from the layout file info_window_layout
                 View v = getLayoutInflater().inflate(R.layout.info_window, null);
- 
+                Log.d("id", arg0.getSnippet());
+
                 // Getting the position from the marker
                 LatLng latLng = arg0.getPosition();
  
@@ -192,24 +200,25 @@ import es.kallejero.parser.Rest;
                 // Getting reference to the TextView to set longitude
                 TextView Descripcion = (TextView) v.findViewById(R.id.descripcion_info);
                 TextView Categoria = (TextView) v.findViewById(R.id.categoria_info);
- 
+                ImageView imageView=(ImageView) findViewById(R.id.image_info);
                 // Setting the latitude
                 Titulo.setText(arg0.getTitle());
                 
                 String[] parts = arg0.getId().split("m");
                 final String lat = parts[0];
                 final String id_ = parts[1];
-                String id=arg0.getId().replaceAll("0","m");
-                
-                HashMap<String, String>negocio = (HashMap<String, String>) mData.get(Integer.parseInt(id_));
-                String nombre=negocio.get("nombre");
-                String descripcion=negocio.get("descripcion");
-                final String categoria="-"+negocio.get("categoria");
-                String url_imagen=negocio.get("imagen");
-                Descripcion.setText(descripcion);
-                Categoria.setText(categoria);
-               
-              
+                String id=arg0.getSnippet();
+                HashMap<String, String>negocio=null;
+              if(mData.size()>=Integer.parseInt(id)-1){
+               negocio = (HashMap<String, String>) mData.get(Integer.parseInt(id)-1);
+               String nombre=negocio.get("nombre");
+               String descripcion=negocio.get("descripcion");
+               final String categoria="-"+negocio.get("categoria");
+               String url_imagen=negocio.get("imagen");
+               Descripcion.setText(descripcion);
+               Categoria.setText(categoria);
+
+              }          
                 return v;
  
             }
@@ -249,6 +258,7 @@ import es.kallejero.parser.Rest;
 			for(int y=0; y<x; y++){
 				HashMap<String, String> negocio=negocios.get(y);
 				String nombre=negocio.get("nombre");
+				String id=negocio.get("id");
 		        String descripcion=negocio.get("descripcion");
 		        String categoria="-"+negocio.get("categoria");
 		        String url_imagen=negocio.get("imagen");
@@ -258,7 +268,9 @@ import es.kallejero.parser.Rest;
 		        double lng = Double.parseDouble(parts[1]);
 		        Mmap.addMarker(new MarkerOptions()
 		        .position(new LatLng(lat, lng))
-		        .title(nombre));
+		        .title(nombre)
+		        .snippet(id)
+		        );
 				
 			}
 			

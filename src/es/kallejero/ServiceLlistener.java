@@ -51,11 +51,14 @@ public class ServiceLlistener implements LocationListener {
 			location.setLatitude(lat);
 			location.setLongitude(lng);
 			double distancia=arg0.distanceTo(location);
-			//Toast.makeText(context, "distancia a "+nombre+": "+distancia, Toast.LENGTH_LONG).show();
-			if(distancia<500){
+			
+			if(distancia<=500){
 				negocios.remove(x);
+				if(negocios.size()==0){
+					context.stopService(new Intent(context, ProximityService.class));
+					//Toast.makeText(context, "servicio parado", Toast.LENGTH_SHORT).show();
+				}
 				createAlert(nombre, negocio);
-				
 				
 			}
 			
@@ -85,20 +88,18 @@ public class ServiceLlistener implements LocationListener {
 		
 		int icono= R.drawable.ic_launcher;
 		Notification alerta= new Notification (icono," Negocio: "+nombre, System.currentTimeMillis());
-		
-		
 		String titulo="Negocio Cerca";
 		String texto="El negocio "+nombre+" esta cerca.";
-		//alerta.defaults |= Notification.DEFAULT_ALL;
-		alerta.flags = Notification.DEFAULT_LIGHTS | Notification.FLAG_AUTO_CANCEL;
+		alerta.defaults |= Notification.DEFAULT_SOUND;
+		alerta.defaults |= Notification.DEFAULT_VIBRATE;
 		Intent alertIntent=new Intent(context, onClick.class);
 		alertIntent.putExtra("negocio", negocio);
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-		
 		alerta.setLatestEventInfo(context, titulo, texto, contentIntent);
-		Toast.makeText(context, "alerta", Toast.LENGTH_SHORT).show();
+		
 		final int alert_id=1;
 		nmanager.notify(alert_id, alerta);
+		
 		
 	}
 	

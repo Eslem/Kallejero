@@ -20,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
@@ -51,6 +52,7 @@ import es.kallejero.parser.JsonParser;
 import es.kallejero.parser.JsonParserComments;
 import es.kallejero.parser.Rest;
 import es.kallejero.parser.RestComments;
+import es.kallejero.parser.downloadImage;
 
 import  es.kallejero.R;
 
@@ -58,7 +60,7 @@ import  es.kallejero.R;
  * Created by Eslem on 17/07/13.
  */
 public class onClick extends Activity {
-	
+	public boolean CisVisible=false;
 	class DownloadTask extends AsyncTask<String, Void, String> {
 		protected String doInBackground(String... params) {
 	         try {
@@ -77,7 +79,10 @@ public class onClick extends Activity {
 	
 	         data_comments.clear();
 	         data_comments.addAll(new JsonParserComments().parserArray(jsonString));
-	
+	         if(data_comments.size()==0){
+	        	 TextView titulo=(TextView) findViewById(R.id.hComments);
+	        	 titulo.setText("No hay ningun comentario aun");
+	         }
 	         mAdapter.notifyDataSetChanged();
 	         Helper.getListViewSize(comentarios);
 	     }
@@ -96,7 +101,7 @@ public class onClick extends Activity {
         Intent i = getIntent();
         // getting attached intent data
         final HashMap<String, String> negocio=(HashMap<String, String>) i.getSerializableExtra("negocio");
-      
+        
         id=negocio.get("id");
         final String nombre=negocio.get("nombre");
         String descripcion=negocio.get("descripcion");
@@ -108,7 +113,7 @@ public class onClick extends Activity {
         String[] parts = posicion.split(",");
         final String lat = parts[0];
         final String lng = parts[1];
-
+        new DownloadTask().execute("?id="+id);
 
         TextView titulo=(TextView) findViewById(R.id.titulo_onClick);
         TextView about=(TextView) findViewById(R.id.descripcion_OnClick);
@@ -157,7 +162,7 @@ public class onClick extends Activity {
         mAdapter = new SimpleAdapter(this, data_comments,
                 R.layout.comentarios, from, to);
         comentarios.setAdapter(mAdapter);
-        new DownloadTask().execute("?id="+id);
+        
        Helper.getListViewSize(comentarios);
         
         //Botones
@@ -203,8 +208,31 @@ public class onClick extends Activity {
 			}
         	
         });
-        // displaying selected product name
+        
+        
 
+        Button comentB=(Button) findViewById(R.id.comments_button);
+        comentB.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				LinearLayout comm=(LinearLayout) findViewById(R.id.comments_layout);
+				if(CisVisible){
+					comm.setVisibility(View.GONE);
+					CisVisible=false;
+					
+				}
+				else{
+					comm.setVisibility(View.VISIBLE);
+					CisVisible=true;
+				}
+				 
+				 
+			     
+			}
+        	
+        });
 
     }
 
