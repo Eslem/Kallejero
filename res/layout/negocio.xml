@@ -5,12 +5,26 @@
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_margin="5dip">
+	<AbsoluteLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp">
+		<ImageView android:layout_width="100dp"
+		           android:layout_height="100dp"
+		            android:src="@drawable/ic_launcher"
+		            android:id="@+id/image"
+		            android:visibility="invisible"
+		       /> 
+      <ProgressBar
+                    android:id="@+id/progresBar"
+                    style="?android:attr/progressBarStyleLargeInverse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:visibility="visible"
+                    
+                    />
 
-<ImageView android:layout_width="100dp"
-           android:layout_height="100dp"
-            android:src="@drawable/ic_launcher"
-       />
-
+      </AbsoluteLayout>
  <LinearLayout android:layout_width="match_parent"
                android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -34,6 +48,8 @@
                android:layout_height="wrap_content"
                android:id="@+id/descripcion"
                android:maxLength="500"
-               android:text="Descripcion"/>
+               android:text="Descripcion"
+               android:layout_marginLeft="10sp"
+               android:layout_marginBottom="10sp"/>
 </LinearLayout>
 </LinearLayout>

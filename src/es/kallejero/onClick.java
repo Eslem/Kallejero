@@ -17,9 +17,12 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
@@ -43,6 +47,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import es.kallejero.mapa.MapaActivity;
 import es.kallejero.parser.Bitmap_fromURL;
+import es.kallejero.parser.JsonParser;
+import es.kallejero.parser.JsonParserComments;
+import es.kallejero.parser.Rest;
+import es.kallejero.parser.RestComments;
 
 import  es.kallejero.R;
 
@@ -50,7 +58,34 @@ import  es.kallejero.R;
  * Created by Eslem on 17/07/13.
  */
 public class onClick extends Activity {
-
+	
+	class DownloadTask extends AsyncTask<String, Void, String> {
+		protected String doInBackground(String... params) {
+	         try {
+	             String jsonString = new RestComments().downloadData(params[0]);
+	             return jsonString;
+	         } catch (Exception e) {
+	             return null;
+	         }
+	     }
+	
+	
+	     protected void onPostExecute(String jsonString) {
+	         if (jsonString == null) {
+	             return;
+	         }
+	
+	         data_comments.clear();
+	         data_comments.addAll(new JsonParserComments().parserArray(jsonString));
+	
+	         mAdapter.notifyDataSetChanged();
+	         Helper.getListViewSize(comentarios);
+	     }
+	}
+  	ArrayList<HashMap<String, String>> data_comments = new ArrayList<HashMap<String, String>>();
+ 	private SimpleAdapter mAdapter;
+	ListView comentarios;
+	
 	private String id;
     @SuppressWarnings("unchecked")
 	public void onCreate(Bundle savedInstanceState) {
@@ -69,7 +104,7 @@ public class onClick extends Activity {
         String url_imagen=negocio.get("imagen");
         String posicion =negocio.get("posicion");
         String Svisitas =negocio.get("visitas");
-        String Spuntuacion =negocio.get("puntuacuio");
+        String Spuntuacion =negocio.get("puntuacion");
         String[] parts = posicion.split(",");
         final String lat = parts[0];
         final String lng = parts[1];
@@ -82,12 +117,12 @@ public class onClick extends Activity {
         TextView visitas=(TextView) findViewById(R.id.visitas_OnClick);
         TextView puntuacion=(TextView) findViewById(R.id.puntuacion_OnCLick);
 
-        visitas.setText("Visitas:" +Svisitas);
-        puntuacion.setText("Ranking: "+Spuntuacion);
+        visitas.setText("Visitas: " +Svisitas);
+        puntuacion.setText("Puntuacion: "+Spuntuacion);
         
         File dir=new File(Environment.getExternalStorageDirectory()
                 + File.separator +"kallejero"+File.separator+"images");
-        if(dir.exists()){
+      if(dir.exists()){
         	Log.d("dir", "exist");
         }
         else{
@@ -104,8 +139,8 @@ public class onClick extends Activity {
         }
         
         else{
-        
-		       new download().execute(url_imagen);
+        	ProgressBar loading=(ProgressBar) findViewById(R.id.progress);
+		       new downloadImage(id, imageView, loading).execute(url_imagen);
 		        	
        
         }
@@ -113,6 +148,19 @@ public class onClick extends Activity {
         about.setText(descripcion);
         category.setText(categoria);
         
+        //Lista
+        comentarios =(ListView)  findViewById(R.id.list_comments);
+        
+        String[] from = { "nombre", "fecha", "comentario" };
+        int[] to = { R.id.nombre_comentario, R.id.fecha_comentario, R.id.texto_comentario };
+
+        mAdapter = new SimpleAdapter(this, data_comments,
+                R.layout.comentarios, from, to);
+        comentarios.setAdapter(mAdapter);
+        new DownloadTask().execute("?id="+id);
+       Helper.getListViewSize(comentarios);
+        
+        //Botones
         Button mapa=(Button) findViewById(R.id.mapa_button);
         mapa.setOnClickListener(new OnClickListener(){
 
@@ -160,151 +208,7 @@ public class onClick extends Activity {
 
     }
 
- class download extends AsyncTask<String, Void, Bitmap>{
-	 @Override
-	    protected Bitmap doInBackground(String... params) {
-	        // TODO Auto-generated method stub
-	        String link = params[0];
-	        link = link.replaceAll(" ", "%20");
-	        try {
-	            URLEncoder.encode(link,"UTF-8");
-	        } catch (UnsupportedEncodingException e) {
-	            e.printStackTrace();
-	        }
-	        Log.d("link", link);
-	        HttpGet httpRequest = null;
-
-	        httpRequest = new HttpGet(link);
-
-	        HttpClient httpclient = new DefaultHttpClient();
-
-	        HttpResponse response = null;
-	        try {
-	            response = (HttpResponse) httpclient.execute(httpRequest);
-	        } catch (ClientProtocolException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        } catch (IOException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }
-
-	        HttpEntity entity = response.getEntity();
-
-	        BufferedHttpEntity bufHttpEntity = null;
-	        try {
-	            bufHttpEntity = new BufferedHttpEntity(entity);
-	        } catch (IOException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }
-
-	        InputStream instream = null;
-	        try {
-	            instream = bufHttpEntity.getContent();
-	        } catch (IOException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }
-	       
-	        try {
-				return decodeFile(instream, 150);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			};
-			return null;
-	    }
-	 
-	 protected void onPostExecute(Bitmap imagen){
-		 ImageView imageView=(ImageView) findViewById(R.id.image_onClick);
-		 ProgressBar loading=(ProgressBar) findViewById(R.id.progress);
-		 loading.setVisibility(View.GONE);
-       	 imageView.setVisibility(View.VISIBLE);
-       	 imageView.setImageBitmap(imagen);
-       	 try {
-			save(imagen, id);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	 }
-	 }
-
-
-
-	    public Bitmap decodeFile(InputStream instream, int reqWidth)
-	            throws IOException {
-	        // Decodificar tamaño de imagen
-	        BitmapFactory.Options o = new BitmapFactory.Options();
-	        o.inJustDecodeBounds = true;
-	        BitmapFactory.decodeStream(instream, null, o);
-
-	        final int width = o.outWidth;
-	        @SuppressWarnings("unused")
-	        final int height = o.outHeight;
-	        // Find the correct scale value. It should be the power of 2.
-	        int inSampleSize = 1;
-
-	        if (width > reqWidth) {
-	            inSampleSize = Math.round((float) width / (float) reqWidth);
-	        }
-
-	        // Decodificar con inSampleSize
-	        BitmapFactory.Options o2 = new BitmapFactory.Options();
-	        o2.inSampleSize = inSampleSize;
-
-	        instream.reset();
-	        
-	        
-	       
-	        return BitmapFactory.decodeStream(instream, null, o2);
-	        //return BitmapFactory.decodeStream(instream, null, o2);
-
-	    }
-	    
-	    
-	    public void save(Bitmap image, String id) throws IOException{
-	    	boolean sdDisponible = false;
-	    	boolean sdAccesoEscritura = false;
-	    	 
-	    	//Comprobamos el estado de la memoria externa (tarjeta SD)
-	    	String estado = Environment.getExternalStorageState();
-	    	 
-	    	if (estado.equals(Environment.MEDIA_MOUNTED))
-	    	{
-	    	    sdDisponible = true;
-	    	    sdAccesoEscritura = true;
-	    	}
-	    	else if (estado.equals(Environment.MEDIA_MOUNTED_READ_ONLY))
-	    	{
-	    	    sdDisponible = true;
-	    	    sdAccesoEscritura = false;
-	    	}
-	    	else
-	    	{
-	    	    sdDisponible = false;
-	    	    sdAccesoEscritura = false;
-	    	}
-	    	
-	    	if(sdDisponible && sdAccesoEscritura){
-	    	ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-	    	image.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
-
-	    	//you can create a new file name "test.jpg" in sdcard folder.
-	    	File f = new File(Environment.getExternalStorageDirectory()+File.separator
-	    							+"kallejero"+File.separator+"images"+File.separator
-	    									+ id+".png");
-	    	f.createNewFile();
-	    	//write the bytes in file
-	    	FileOutputStream fo = new FileOutputStream(f);
-	    	fo.write(bytes.toByteArray());
-
-	    	// remember close de FileOutput
-	    	fo.close();
-	    	Bitmap imagen = BitmapFactory.decodeFile(f.getAbsolutePath());
-	    	}
-	    }
+ 
  }
 
 

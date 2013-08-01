@@ -146,46 +146,52 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int actionViewLayout=0x7f04001c;
-        public static final int action_settings=0x7f04001d;
-        public static final int categoria=0x7f04000f;
-        public static final int categoria_OnCLick=0x7f040015;
-        public static final int categoria_info=0x7f04000c;
+        public static final int actionViewLayout=0x7f040021;
+        public static final int action_settings=0x7f040022;
+        public static final int categoria=0x7f040014;
+        public static final int categoria_OnCLick=0x7f040019;
+        public static final int categoria_info=0x7f04000f;
         public static final int categorias=0x7f040004;
         public static final int ciudades=0x7f040009;
         public static final int content_frame=0x7f040006;
-        public static final int descripcion=0x7f040010;
-        public static final int descripcion_OnClick=0x7f040016;
-        public static final int descripcion_info=0x7f04000d;
-        public static final int dest_button=0x7f04001a;
+        public static final int descripcion=0x7f040015;
+        public static final int descripcion_OnClick=0x7f04001a;
+        public static final int descripcion_info=0x7f040010;
+        public static final int dest_button=0x7f04001f;
         public static final int drawer_layout=0x7f040005;
-        public static final int image_info=0x7f04000a;
-        public static final int image_onClick=0x7f040011;
+        public static final int fecha_comentario=0x7f04000b;
+        public static final int image=0x7f040011;
+        public static final int image_info=0x7f04000d;
+        public static final int image_onClick=0x7f040016;
         public static final int left_drawer=0x7f040007;
-        public static final int link_button=0x7f04001b;
+        public static final int link_button=0x7f040020;
+        public static final int list_comments=0x7f04001d;
         public static final int map=0x7f040008;
-        public static final int mapa_button=0x7f040019;
+        public static final int mapa_button=0x7f04001e;
+        public static final int nombre_comentario=0x7f04000a;
         public static final int none=0x7f040000;
         public static final int normal=0x7f040001;
-        public static final int progress=0x7f040012;
-        public static final int puntuacion_OnCLick=0x7f040018;
+        public static final int progresBar=0x7f040012;
+        public static final int progress=0x7f040017;
+        public static final int puntuacion_OnCLick=0x7f04001c;
         public static final int satellite=0x7f040002;
-        public static final int separator=0x7f040014;
         public static final int terrain=0x7f040003;
-        public static final int titulo=0x7f04000e;
-        public static final int titulo_info=0x7f04000b;
-        public static final int titulo_onClick=0x7f040013;
-        public static final int visitas_OnClick=0x7f040017;
+        public static final int texto_comentario=0x7f04000c;
+        public static final int titulo=0x7f040013;
+        public static final int titulo_info=0x7f04000e;
+        public static final int titulo_onClick=0x7f040018;
+        public static final int visitas_OnClick=0x7f04001b;
     }
     public static final class layout {
         public static final int action_bar=0x7f030000;
         public static final int activity_main=0x7f030001;
         public static final int activity_map=0x7f030002;
         public static final int activity_negocios=0x7f030003;
-        public static final int info_window=0x7f030004;
-        public static final int negocio=0x7f030005;
-        public static final int onclick_negocio=0x7f030006;
-        public static final int tab_activity=0x7f030007;
+        public static final int comentarios=0x7f030004;
+        public static final int info_window=0x7f030005;
+        public static final int negocio=0x7f030006;
+        public static final int onclick_negocio=0x7f030007;
+        public static final int tab_activity=0x7f030008;
     }
     public static final class menu {
         public static final int main=0x7f090000;
@@ -273,6 +279,7 @@ containing a value of this type.
          */
         public static final int AppTheme=0x7f080001;
         public static final int Titulo=0x7f080002;
+        public static final int header=0x7f080003;
     }
     public static final class styleable {
         /** Attributes that can be used with a MapAttrs.

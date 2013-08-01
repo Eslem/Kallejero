@@ -53,7 +53,7 @@ public class NegociosActivity extends ListActivity {
     }
 
     ArrayList<HashMap<String, String>> mData = new ArrayList<HashMap<String, String>>();
-    private SimpleAdapter mAdapter;
+    private MyAdapter mAdapter;
 
     /** Called when the activity is first created. */
     @Override
@@ -61,11 +61,10 @@ public class NegociosActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_negocios);
 
-        String[] from = { "nombre", "descripcion", "categoria" };
+        /*String[] from = { "nombre", "descripcion", "categoria" };
         int[] to = { R.id.titulo, R.id.descripcion, R.id.categoria };
-
-        mAdapter = new SimpleAdapter(this, mData,
-                R.layout.negocio, from, to);
+*/
+        mAdapter = new MyAdapter(this, mData);
         setListAdapter(mAdapter);
        
         Spinner categorias=(Spinner) findViewById(R.id.categorias);
