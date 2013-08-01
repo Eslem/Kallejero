@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    
+    <TextView 
+        android:id="@+id/nombre_comentario"
+       	android:layout_width="wrap_content"
+   		 android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:layout_marginTop="15sp"
+        android:layout_marginLeft="15sp"
+        android:textSize="24sp"
+        />
+
+    <TextView
+        android:id="@+id/fecha_comentario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/nombre_comentario"
+        android:layout_alignBottom="@+id/nombre_comentario"
+        android:layout_marginLeft="19dp"
+        android:layout_toRightOf="@+id/nombre_comentario"
+        android:text="fecha"
+        android:textColor="#999"
+        android:textSize="14sp" />
+    
+     <TextView 
+        android:id="@+id/texto_comentario"
+       	android:layout_width="wrap_content"
+   		 android:layout_height="wrap_content"
+        android:text="comentario"
+        android:layout_marginTop="15sp"
+        android:layout_marginLeft="35sp"
+        android:layout_below="@id/nombre_comentario"
+        android:textSize="18sp"
+        android:maxLength="250"
+        />
+
+</RelativeLayout>
