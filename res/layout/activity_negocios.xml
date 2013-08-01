@@ -1,0 +1,46 @@
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical" >
+
+    
+<LinearLayout
+     android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal" >
+    <Spinner
+        android:id="@+id/categorias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/categorias"
+        android:gravity="right"
+        android:layout_gravity="right" 
+        android:prompt="@string/categorias" />
+    
+     <Spinner
+        android:id="@+id/ciudades"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/ciudades"
+        android:gravity="right"
+        android:layout_gravity="right" 
+        android:prompt="@string/categorias" />
+   
+</LinearLayout>
+    <TextView
+            android:id="@android:id/empty"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Cargando..." />
+
+    <ListView
+            android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    
+    
+    
+   
+</LinearLayout>

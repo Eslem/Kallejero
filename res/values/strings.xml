@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Kallejero</string>
+    <string name="categorias">Categorias</string>
+    <string name="ciudades">Ciudad</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="apikey">AIzaSyBS_Ni4_Wqfck3CprmqKKGJz_LF2kMTGKg</string>
+
+    <string-array name="categorias">
+        <item>Todas</item>
+        <item>Servicio</item>
+        <item>Tienda</item>
+        <item>Restaurante</item>
+        <item>Bar_Pub</item>
+        <item>Ocio</item>
+    </string-array>
+    <string-array name="ciudades">
+        <item>Todas</item>
+        <item>Valencia</item>
+        <item>Mislata</item>
+        <item>Alicante</item>
+    </string-array>
+
+    <string name="title_activity_test">Test</string>
+
+</resources>
