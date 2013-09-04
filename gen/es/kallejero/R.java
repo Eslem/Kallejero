@@ -9,8 +9,8 @@ package es.kallejero;
 
 public final class R {
     public static final class array {
-        public static final int categorias=0x7f070000;
-        public static final int ciudades=0x7f070001;
+        public static int categorias=0x7f070000;
+        public static int ciudades=0x7f070001;
     }
     public static final class attr {
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
@@ -20,7 +20,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int cameraBearing=0x7f010001;
+        public static int cameraBearing=0x7f010001;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -28,7 +28,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int cameraTargetLat=0x7f010002;
+        public static int cameraTargetLat=0x7f010002;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -36,7 +36,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int cameraTargetLng=0x7f010003;
+        public static int cameraTargetLng=0x7f010003;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -44,7 +44,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int cameraTilt=0x7f010004;
+        public static int cameraTilt=0x7f010004;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -52,7 +52,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int cameraZoom=0x7f010005;
+        public static int cameraZoom=0x7f010005;
         /** <p>Must be one of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -65,7 +65,7 @@ containing a value of this type.
 <tr><td><code>terrain</code></td><td>3</td><td></td></tr>
 </table>
          */
-        public static final int mapType=0x7f010000;
+        public static int mapType=0x7f010000;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -73,7 +73,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int uiCompass=0x7f010006;
+        public static int uiCompass=0x7f010006;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -81,7 +81,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int uiRotateGestures=0x7f010007;
+        public static int uiRotateGestures=0x7f010007;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -89,7 +89,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int uiScrollGestures=0x7f010008;
+        public static int uiScrollGestures=0x7f010008;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -97,7 +97,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int uiTiltGestures=0x7f010009;
+        public static int uiTiltGestures=0x7f010009;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -105,7 +105,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int uiZoomControls=0x7f01000a;
+        public static int uiZoomControls=0x7f01000a;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -113,7 +113,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int uiZoomGestures=0x7f01000b;
+        public static int uiZoomGestures=0x7f01000b;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -121,7 +121,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int useViewLifecycle=0x7f01000c;
+        public static int useViewLifecycle=0x7f01000c;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -129,7 +129,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int zOrderOnTop=0x7f01000d;
+        public static int zOrderOnTop=0x7f01000d;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -138,123 +138,122 @@ containing a value of this type.
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f060000;
-        public static final int activity_vertical_margin=0x7f060001;
+        public static int activity_horizontal_margin=0x7f060000;
+        public static int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
-        public static final int action_search=0x7f020000;
-        public static final int button_drawable=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
+        public static int action_search=0x7f020000;
+        public static int button_drawable=0x7f020001;
+        public static int ic_launcher=0x7f020002;
     }
     public static final class id {
-        public static final int actionViewLayout=0x7f040025;
-        public static final int action_settings=0x7f040026;
-        public static final int bottom_buttons=0x7f040016;
-        public static final int categoria=0x7f040014;
-        public static final int categoria_OnCLick=0x7f04001e;
-        public static final int categoria_info=0x7f04000f;
-        public static final int categorias=0x7f040004;
-        public static final int ciudades=0x7f040009;
-        public static final int comments_button=0x7f04001a;
-        public static final int comments_layout=0x7f040022;
-        public static final int content_frame=0x7f040006;
-        public static final int descripcion=0x7f040015;
-        public static final int descripcion_OnClick=0x7f04001f;
-        public static final int descripcion_info=0x7f040010;
-        public static final int dest_button=0x7f040018;
-        public static final int drawer_layout=0x7f040005;
-        public static final int fecha_comentario=0x7f04000b;
-        public static final int hComments=0x7f040023;
-        public static final int image=0x7f040011;
-        public static final int image_info=0x7f04000d;
-        public static final int image_onClick=0x7f04001b;
-        public static final int left_drawer=0x7f040007;
-        public static final int link_button=0x7f040019;
-        public static final int list_comments=0x7f040024;
-        public static final int map=0x7f040008;
-        public static final int mapa_button=0x7f040017;
-        public static final int nombre_comentario=0x7f04000a;
-        public static final int none=0x7f040000;
-        public static final int normal=0x7f040001;
-        public static final int progresBar=0x7f040012;
-        public static final int progress=0x7f04001c;
-        public static final int puntuacion_OnCLick=0x7f040021;
-        public static final int satellite=0x7f040002;
-        public static final int terrain=0x7f040003;
-        public static final int texto_comentario=0x7f04000c;
-        public static final int titulo=0x7f040013;
-        public static final int titulo_info=0x7f04000e;
-        public static final int titulo_onClick=0x7f04001d;
-        public static final int visitas_OnClick=0x7f040020;
+        public static int action_settings=0x7f040025;
+        public static int bottom_buttons=0x7f040016;
+        public static int categoria=0x7f040014;
+        public static int categoria_OnCLick=0x7f04001e;
+        public static int categoria_info=0x7f04000f;
+        public static int categorias=0x7f040004;
+        public static int ciudades=0x7f040009;
+        public static int comments_button=0x7f04001a;
+        public static int comments_layout=0x7f040022;
+        public static int content_frame=0x7f040006;
+        public static int descripcion=0x7f040015;
+        public static int descripcion_OnClick=0x7f04001f;
+        public static int descripcion_info=0x7f040010;
+        public static int dest_button=0x7f040018;
+        public static int drawer_layout=0x7f040005;
+        public static int fecha_comentario=0x7f04000b;
+        public static int hComments=0x7f040023;
+        public static int image=0x7f040011;
+        public static int image_info=0x7f04000d;
+        public static int image_onClick=0x7f04001b;
+        public static int left_drawer=0x7f040007;
+        public static int link_button=0x7f040019;
+        public static int list_comments=0x7f040024;
+        public static int map=0x7f040008;
+        public static int mapa_button=0x7f040017;
+        public static int nombre_comentario=0x7f04000a;
+        public static int none=0x7f040000;
+        public static int normal=0x7f040001;
+        public static int progresBar=0x7f040012;
+        public static int progress=0x7f04001c;
+        public static int puntuacion_OnCLick=0x7f040021;
+        public static int satellite=0x7f040002;
+        public static int terrain=0x7f040003;
+        public static int texto_comentario=0x7f04000c;
+        public static int titulo=0x7f040013;
+        public static int titulo_info=0x7f04000e;
+        public static int titulo_onClick=0x7f04001d;
+        public static int visitas_OnClick=0x7f040020;
     }
     public static final class layout {
-        public static final int action_bar=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_map=0x7f030002;
-        public static final int activity_negocios=0x7f030003;
-        public static final int comentarios=0x7f030004;
-        public static final int info_window=0x7f030005;
-        public static final int negocio=0x7f030006;
-        public static final int onclick_negocio=0x7f030007;
-        public static final int tab_activity=0x7f030008;
+        public static int action_bar=0x7f030000;
+        public static int activity_main=0x7f030001;
+        public static int activity_map=0x7f030002;
+        public static int activity_negocios=0x7f030003;
+        public static int comentarios=0x7f030004;
+        public static int info_window=0x7f030005;
+        public static int negocio=0x7f030006;
+        public static int onclick_negocio=0x7f030007;
+        public static int tab_activity=0x7f030008;
     }
     public static final class menu {
-        public static final int main=0x7f090000;
-        public static final int test=0x7f090001;
+        public static int main=0x7f090000;
+        public static int test=0x7f090001;
     }
     public static final class string {
-        public static final int action_settings=0x7f05000e;
-        public static final int apikey=0x7f050012;
-        public static final int app_name=0x7f05000b;
-        public static final int categorias=0x7f05000c;
-        public static final int ciudades=0x7f05000d;
+        public static int action_settings=0x7f05000e;
+        public static int apikey=0x7f050012;
+        public static int app_name=0x7f05000b;
+        public static int categorias=0x7f05000c;
+        public static int ciudades=0x7f05000d;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=30] 
          */
-        public static final int common_google_play_services_enable_button=0x7f050006;
+        public static int common_google_play_services_enable_button=0x7f050006;
         /**  Message in confirmation dialog informing user they need to enable
         Google Play services in application settings [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_enable_text=0x7f050005;
+        public static int common_google_play_services_enable_text=0x7f050005;
         /**  Title of confirmation dialog informing user they need to enable
         Google Play services in application settings [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_enable_title=0x7f050004;
+        public static int common_google_play_services_enable_title=0x7f050004;
         /**  Button in confirmation dialog for installing Google Play services [CHAR LIMIT=30] 
          */
-        public static final int common_google_play_services_install_button=0x7f050003;
+        public static int common_google_play_services_install_button=0x7f050003;
         /**  (For phones) Message in confirmation dialog informing user that
         they need to install Google Play services (from Play Store) [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_install_text_phone=0x7f050001;
+        public static int common_google_play_services_install_text_phone=0x7f050001;
         /**  (For tablets) Message in confirmation dialog informing user that
         they need to install Google Play services (from Play Store) [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_install_text_tablet=0x7f050002;
+        public static int common_google_play_services_install_text_tablet=0x7f050002;
         /**  Title of confirmation dialog informing user that they need to install
         Google Play services (from Play Store) [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_install_title=0x7f050000;
+        public static int common_google_play_services_install_title=0x7f050000;
         /**  Message in confirmation dialog informing user there is an unknow issue in Google Player
         services [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_unknown_issue=0x7f050009;
+        public static int common_google_play_services_unknown_issue=0x7f050009;
         /**  Button in confirmation dialog for updating Google Play services [CHAR LIMIT=20] 
          */
-        public static final int common_google_play_services_update_button=0x7f05000a;
+        public static int common_google_play_services_update_button=0x7f05000a;
         /**  Message in confirmation dialog informing user that they need to update
         Google Play services (from Play Store) [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_update_text=0x7f050008;
+        public static int common_google_play_services_update_text=0x7f050008;
         /**  Title of confirmation dialog informing user that they need to update
         Google Play services (from Play Store) [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_update_title=0x7f050007;
-        public static final int drawer_close=0x7f050011;
-        public static final int drawer_open=0x7f050010;
-        public static final int hello_world=0x7f05000f;
-        public static final int title_activity_test=0x7f050013;
+        public static int common_google_play_services_update_title=0x7f050007;
+        public static int drawer_close=0x7f050011;
+        public static int drawer_open=0x7f050010;
+        public static int hello_world=0x7f05000f;
+        public static int title_activity_test=0x7f050013;
     }
     public static final class style {
         /** 
@@ -278,14 +277,14 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080000;
+        public static int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f080001;
-        public static final int Titulo=0x7f080002;
-        public static final int btnblack=0x7f080004;
-        public static final int header=0x7f080003;
+        public static int AppTheme=0x7f080001;
+        public static int Titulo=0x7f080002;
+        public static int btnblack=0x7f080004;
+        public static int header=0x7f080003;
     }
     public static final class styleable {
         /** Attributes that can be used with a MapAttrs.

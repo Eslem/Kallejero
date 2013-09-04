@@ -19,8 +19,7 @@ int dimen activity_vertical_margin 0x7f060001
 int drawable action_search 0x7f020000
 int drawable button_drawable 0x7f020001
 int drawable ic_launcher 0x7f020002
-int id actionViewLayout 0x7f040025
-int id action_settings 0x7f040026
+int id action_settings 0x7f040025
 int id bottom_buttons 0x7f040016
 int id categoria 0x7f040014
 int id categoria_OnCLick 0x7f04001e

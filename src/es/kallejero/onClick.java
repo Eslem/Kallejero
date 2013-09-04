@@ -113,7 +113,7 @@ public class onClick extends Activity {
         String[] parts = posicion.split(",");
         final String lat = parts[0];
         final String lng = parts[1];
-        new DownloadTask().execute("?id="+id);
+        
 
         TextView titulo=(TextView) findViewById(R.id.titulo_onClick);
         TextView about=(TextView) findViewById(R.id.descripcion_OnClick);
@@ -164,7 +164,7 @@ public class onClick extends Activity {
         comentarios.setAdapter(mAdapter);
         
        Helper.getListViewSize(comentarios);
-        
+       new DownloadTask().execute("?id="+id);
         //Botones
         Button mapa=(Button) findViewById(R.id.mapa_button);
         mapa.setOnClickListener(new OnClickListener(){

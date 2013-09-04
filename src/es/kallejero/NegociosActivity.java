@@ -104,7 +104,7 @@ public class NegociosActivity extends ListActivity {
 				
 				
 				new DownloadTask().execute(opciones);
-				Toast.makeText(getApplicationContext(), "Selecionada: "+arg0.getItemAtPosition(arg2).toString()+ "   Opcion: "+opciones, Toast.LENGTH_LONG).show();
+				//Toast.makeText(getApplicationContext(), "Selecionada: "+arg0.getItemAtPosition(arg2).toString()+ "   Opcion: "+opciones, Toast.LENGTH_LONG).show();
 			}
 
 			@Override
@@ -148,7 +148,7 @@ public class NegociosActivity extends ListActivity {
 				}			
 				
 				new DownloadTask().execute(opciones);
-				Toast.makeText(getApplicationContext(), "Selecionada: "+arg0.getItemAtPosition(arg2).toString()+ "   Opcion: "+opciones, Toast.LENGTH_LONG).show();
+				//Toast.makeText(getApplicationContext(), "Selecionada: "+arg0.getItemAtPosition(arg2).toString()+ "   Opcion: "+opciones, Toast.LENGTH_LONG).show();
 			}
 
 			@Override

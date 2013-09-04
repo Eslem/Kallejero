@@ -8,6 +8,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -32,8 +33,9 @@ public class MainActivity extends TabActivity {
         setContentView(R.layout.tab_activity);
 
 		TabHost tabs=(TabHost)findViewById(android.R.id.tabhost);
+		//setTabColor(tabs);
 		tabs.setup();
-		tabs.setBackgroundColor(color.background_dark);
+		
 		TabHost.TabSpec spec=tabs.newTabSpec("mitab1");
 		
 		Intent negocios = new Intent(this, NegociosActivity.class);
@@ -54,6 +56,13 @@ public class MainActivity extends TabActivity {
 
     }
     
+    public static void setTabColor(TabHost tabhost) {
+        for(int i=0;i<tabhost.getTabWidget().getChildCount();i++)
+        {
+            tabhost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#000000")); //unselected
+        }
+        tabhost.getTabWidget().getChildAt(tabhost.getCurrentTab()).setBackgroundColor(Color.parseColor("#FF0000")); // selected
+    }
     
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
