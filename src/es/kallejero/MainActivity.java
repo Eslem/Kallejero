@@ -56,14 +56,7 @@ public class MainActivity extends TabActivity {
 
     }
     
-    public static void setTabColor(TabHost tabhost) {
-        for(int i=0;i<tabhost.getTabWidget().getChildCount();i++)
-        {
-            tabhost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#000000")); //unselected
-        }
-        tabhost.getTabWidget().getChildAt(tabhost.getCurrentTab()).setBackgroundColor(Color.parseColor("#FF0000")); // selected
-    }
-    
+       
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);

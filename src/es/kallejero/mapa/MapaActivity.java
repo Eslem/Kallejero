@@ -12,6 +12,7 @@ import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -78,11 +79,11 @@ import es.kallejero.parser.downloadImage;
 	            if (jsonString == null) {
 	                return;
 	            }
-
 	            mData.clear();
 	            mData.addAll(new JsonParser().parserArray(jsonString));
-
-	           setMarkers(mData);
+	            Mmap.clear();
+	            Toast.makeText(getApplicationContext(), "testing changes", Toast.LENGTH_LONG).show();
+	            //setMarkers(mData);
 	        }
 
 	    }
@@ -95,6 +96,13 @@ import es.kallejero.parser.downloadImage;
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			
+			//Compuebo q este el array para parsearlo
+			if(mData == null){
+				opciones=MainActivity.opciones;
+		    	new DownloadTask().execute(opciones);
+			}
+			
+			
 			setContentView(R.layout.activity_map);
 			Mmap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 					
@@ -104,17 +112,25 @@ import es.kallejero.parser.downloadImage;
 			//Mmap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 16));
 			 
 			final LocationManager lm= (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-			LocationListener mlistener=  new MiLocationListener(this, Mmap);
-			lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlistener);
+			
 			double longitude;
 			double latitude;
 			
 			
 			if(!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-			    //Ask the user to enable GPS
-				location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-				longitude = location.getLongitude();
-				latitude = location.getLatitude();
+
+				//Comperuebo posicion por internet
+				if(lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+					location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+					LocationListener mlistener=  new MiLocationListener(this, Mmap);
+					lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mlistener);
+				}
+				if(location != null){
+					longitude = location.getLongitude();
+					latitude = location.getLatitude();
+				}
+				
+				//Alerta para activar GPS
 			    AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			    builder.setTitle("Location Manager");
 			    builder.setMessage("Quieres iniciar el Gps para mayor eficiencia?");
@@ -135,6 +151,10 @@ import es.kallejero.parser.downloadImage;
 			        }
 			    });
 			    builder.create().show();
+			}
+			else{
+				LocationListener mlistener=  new MiLocationListener(this, Mmap);
+				lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlistener);
 			}
 			
 			
@@ -162,8 +182,10 @@ import es.kallejero.parser.downloadImage;
 			});
 			Intent intent=getIntent();
 			opciones=es.kallejero.MainActivity.opciones;
+			if(opciones != null){
+				new DownloadTask().execute(opciones);
+			}
 			
-			new DownloadTask().execute(opciones);
 			if(intent.hasExtra("lat")){
 				String lat=intent.getStringExtra("lat");
 				String lng=intent.getStringExtra("lng");
@@ -175,7 +197,7 @@ import es.kallejero.parser.downloadImage;
 				Mmap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitud, longitud), 16));
 			}
 			
-			Mmap.setInfoWindowAdapter(new InfoWindowAdapter() {
+			/*Mmap.setInfoWindowAdapter(new InfoWindowAdapter() {
  
             // Use default InfoWindow frame
             @Override
@@ -209,20 +231,21 @@ import es.kallejero.parser.downloadImage;
                 final String id_ = parts[1];
                 String id=arg0.getSnippet();
                 HashMap<String, String>negocio=null;
-              if(mData.size()>=Integer.parseInt(id)-1){
-               negocio = (HashMap<String, String>) mData.get(Integer.parseInt(id)-1);
-               String nombre=negocio.get("nombre");
-               String descripcion=negocio.get("descripcion");
-               final String categoria="-"+negocio.get("categoria");
-               String url_imagen=negocio.get("imagen");
-               Descripcion.setText(descripcion);
-               Categoria.setText(categoria);
+              
+                //if(mData.size()>=Integer.parseInt(id)-1){
+	               negocio = (HashMap<String, String>) mData.get(Integer.parseInt(id_));
+	               String nombre=negocio.get("nombre");
+	               String descripcion=negocio.get("descripcion");
+	               final String categoria="-"+negocio.get("categoria");
+	               String url_imagen=negocio.get("imagen");
+	               Descripcion.setText(descripcion);
+	               Categoria.setText(categoria);
 
-              }          
+              //}          
                 return v;
  
             }
-        });
+        });*/
 			
 			Mmap.setOnInfoWindowClickListener(new OnInfoWindowClickListener(){
 
@@ -255,6 +278,7 @@ import es.kallejero.parser.downloadImage;
 		
 		public void setMarkers(ArrayList<HashMap<String, String>> negocios){
 			int x=negocios.size();
+			
 			for(int y=0; y<x; y++){
 				HashMap<String, String> negocio=negocios.get(y);
 				String nombre=negocio.get("nombre");
@@ -266,10 +290,12 @@ import es.kallejero.parser.downloadImage;
 		        String[] parts = posicion.split(",");
 		        double lat = Double.parseDouble(parts[0]);
 		        double lng = Double.parseDouble(parts[1]);
+		        Log.d("marker", "marker added");
 		        Mmap.addMarker(new MarkerOptions()
 		        .position(new LatLng(lat, lng))
-		        .title(nombre)
+		        .title("test")
 		        .snippet(id)
+		        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
 		        );
 				
 			}
@@ -280,7 +306,7 @@ import es.kallejero.parser.downloadImage;
 		
 		@Override
 	    protected void onResume() { 
-		super.onResume();
+			super.onResume();
 	    
 	    	opciones=MainActivity.opciones;
 	    	new DownloadTask().execute(opciones);
