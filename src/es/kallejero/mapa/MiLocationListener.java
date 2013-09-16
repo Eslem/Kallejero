@@ -26,7 +26,7 @@ public class MiLocationListener implements LocationListener {
 	@Override
 		public void onLocationChanged(Location arg0) {
 		// TODO Auto-generated method stub
-		map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(arg0.getAltitude(), arg0.getLatitude()), 16));
+		map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(arg0.getLatitude(), arg0.getLongitude()), 13));
 	}
 	
 	@Override

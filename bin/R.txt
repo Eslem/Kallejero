@@ -17,8 +17,16 @@ int attr zOrderOnTop 0x7f01000d
 int dimen activity_horizontal_margin 0x7f060000
 int dimen activity_vertical_margin 0x7f060001
 int drawable action_search 0x7f020000
-int drawable button_drawable 0x7f020001
-int drawable ic_launcher 0x7f020002
+int drawable alimentacion 0x7f020001
+int drawable button_drawable 0x7f020002
+int drawable centrosc 0x7f020003
+int drawable ic_launcher 0x7f020004
+int drawable ocio 0x7f020005
+int drawable publico 0x7f020006
+int drawable restaurante 0x7f020007
+int drawable saludybelleza 0x7f020008
+int drawable servicio 0x7f020009
+int drawable tienda 0x7f02000a
 int id action_settings 0x7f040025
 int id bottom_buttons 0x7f040016
 int id categoria 0x7f040014
@@ -37,7 +45,7 @@ int id drawer_layout 0x7f040005
 int id fecha_comentario 0x7f04000b
 int id hComments 0x7f040023
 int id image 0x7f040011
-int id image_info 0x7f04000d
+int id image_map 0x7f04000d
 int id image_onClick 0x7f04001b
 int id left_drawer 0x7f040007
 int id link_button 0x7f040019

@@ -6,34 +6,30 @@
 
     <LinearLayout
                   android:orientation="horizontal"
-                  android:layout_width="wrap_content"
+                  android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
                     android:gravity="center_horizontal">
 
 
-    <AbsoluteLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
+          <ImageView
                     android:layout_height="50dp"
                     android:layout_width="50dp"
                     android:maxHeight="75dp"
                     android:maxWidth="75dp"
-                    android:id="@+id/image_info"
+                    android:id="@+id/image_map"
                     android:src="@drawable/ic_launcher"
-                    
+ 					android:layout_weight="1"                    
              />
            
 
-        </AbsoluteLayout>
 
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                 android:id="@+id/titulo_info"
                 android:text="Titulo"
                 android:textSize="18dp"
-                android:layout_marginTop="15sp"/>
+                android:layout_marginTop="15sp"
+                android:layout_weight="2"/>
 
 
 
@@ -54,7 +50,7 @@
             android:id="@+id/descripcion_info"
             android:text="Descripcion"
             android:layout_margin="20sp"
-            android:maxLines="8"
+            android:maxLines="4"
             android:gravity="center_horizontal"
             />
     

@@ -82,8 +82,8 @@ import es.kallejero.parser.downloadImage;
 	            mData.clear();
 	            mData.addAll(new JsonParser().parserArray(jsonString));
 	            Mmap.clear();
-	            Toast.makeText(getApplicationContext(), "testing changes", Toast.LENGTH_LONG).show();
-	            //setMarkers(mData);
+	            //Toast.makeText(getApplicationContext(), "testing changes", Toast.LENGTH_LONG).show();
+	            setMarkers(mData);
 	        }
 
 	    }
@@ -115,7 +115,7 @@ import es.kallejero.parser.downloadImage;
 			
 			double longitude;
 			double latitude;
-			
+			Intent intent=getIntent();
 			
 			if(!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
@@ -123,7 +123,11 @@ import es.kallejero.parser.downloadImage;
 				if(lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
 					location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 					LocationListener mlistener=  new MiLocationListener(this, Mmap);
-					lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mlistener);
+					
+					
+					if(!intent.hasExtra("lat")){
+						lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500000, 0, mlistener);
+					}
 				}
 				if(location != null){
 					longitude = location.getLongitude();
@@ -154,7 +158,9 @@ import es.kallejero.parser.downloadImage;
 			}
 			else{
 				LocationListener mlistener=  new MiLocationListener(this, Mmap);
-				lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlistener);
+				if(!intent.hasExtra("lat")){
+					lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500000, 0, mlistener);
+				}
 			}
 			
 			
@@ -180,7 +186,6 @@ import es.kallejero.parser.downloadImage;
 			                Toast.LENGTH_LONG).show();
 				}
 			});
-			Intent intent=getIntent();
 			opciones=es.kallejero.MainActivity.opciones;
 			if(opciones != null){
 				new DownloadTask().execute(opciones);
@@ -197,7 +202,7 @@ import es.kallejero.parser.downloadImage;
 				Mmap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitud, longitud), 16));
 			}
 			
-			/*Mmap.setInfoWindowAdapter(new InfoWindowAdapter() {
+			Mmap.setInfoWindowAdapter(new InfoWindowAdapter() {
  
             // Use default InfoWindow frame
             @Override
@@ -222,30 +227,39 @@ import es.kallejero.parser.downloadImage;
                 // Getting reference to the TextView to set longitude
                 TextView Descripcion = (TextView) v.findViewById(R.id.descripcion_info);
                 TextView Categoria = (TextView) v.findViewById(R.id.categoria_info);
-                ImageView imageView=(ImageView) findViewById(R.id.image_info);
+                ImageView imageView=(ImageView) v.findViewById(R.id.image_map);
                 // Setting the latitude
                 Titulo.setText(arg0.getTitle());
                 
-                String[] parts = arg0.getId().split("m");
-                final String lat = parts[0];
-                final String id_ = parts[1];
-                String id=arg0.getSnippet();
+                
+                String position=arg0.getSnippet();
                 HashMap<String, String>negocio=null;
               
-                //if(mData.size()>=Integer.parseInt(id)-1){
-	               negocio = (HashMap<String, String>) mData.get(Integer.parseInt(id_));
-	               String nombre=negocio.get("nombre");
-	               String descripcion=negocio.get("descripcion");
-	               final String categoria="-"+negocio.get("categoria");
-	               String url_imagen=negocio.get("imagen");
-	               Descripcion.setText(descripcion);
-	               Categoria.setText(categoria);
+                negocio = (HashMap<String, String>) mData.get(Integer.parseInt(position));
+	            String descripcion=negocio.get("descripcion");
+	            final String categoria="-"+negocio.get("categoria");
+	            Descripcion.setText(descripcion);
+	            Categoria.setText(categoria);
+	            String id=negocio.get("id");
+	            
+	            //Imagen
+	            File dir=new File(Environment.getExternalStorageDirectory()
+	  	                + File.separator +"kallejero"+File.separator+"images");
+	  	        if(!dir.exists()){
+	  	        	dir.mkdirs();
+	  	        }
+	  	        File file = new File(dir.getPath().toString()+File.separator + id+".png");
+	  	        if(file.exists()){
+	  	        	 
+	  	        	Bitmap imagen = BitmapFactory.decodeFile(file.getAbsolutePath());
+	  	        	imageView.setImageBitmap(imagen);
+	  	        }
 
-              //}          
+                      
                 return v;
  
             }
-        });*/
+        });
 			
 			Mmap.setOnInfoWindowClickListener(new OnInfoWindowClickListener(){
 
@@ -253,12 +267,9 @@ import es.kallejero.parser.downloadImage;
 				public void onInfoWindowClick(Marker arg0) {
 					// TODO Auto-generated method stub
 					Intent intent = new Intent(MapaActivity.this, onClick.class);
-					 String[] parts = arg0.getId().split("m");
-		                final String lat = parts[0];
-		                final String id_ = parts[1];
-		               
+					 String id=arg0.getSnippet();
 		                
-		                HashMap<String, String>negocio = (HashMap<String, String>) mData.get(Integer.parseInt(id_));
+		            HashMap<String, String>negocio = (HashMap<String, String>) mData.get(Integer.parseInt(id));
 	               
 	                intent.putExtra("negocio", negocio);
 	                 startActivity(intent);
@@ -282,20 +293,25 @@ import es.kallejero.parser.downloadImage;
 			for(int y=0; y<x; y++){
 				HashMap<String, String> negocio=negocios.get(y);
 				String nombre=negocio.get("nombre");
-				String id=negocio.get("id");
-		        String descripcion=negocio.get("descripcion");
-		        String categoria="-"+negocio.get("categoria");
-		        String url_imagen=negocio.get("imagen");
+				
 		        String posicion =negocio.get("posicion");
 		        String[] parts = posicion.split(",");
+		        String icon=negocio.get("categoria").toLowerCase();
 		        double lat = Double.parseDouble(parts[0]);
 		        double lng = Double.parseDouble(parts[1]);
-		        Log.d("marker", "marker added");
+		       	//Posicion en el array
+		        String position = ""+y;
+		        
+		        String uri = "drawable/"+icon;
+
+		        // int imageResource = R.drawable.icon;
+		        int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+		        
 		        Mmap.addMarker(new MarkerOptions()
 		        .position(new LatLng(lat, lng))
-		        .title("test")
-		        .snippet(id)
-		        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+		        .title(nombre)
+		        .snippet(position)
+		        .icon(BitmapDescriptorFactory.fromResource(imageResource))
 		        );
 				
 			}
